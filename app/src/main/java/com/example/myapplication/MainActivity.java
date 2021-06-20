@@ -1,55 +1,58 @@
 package com.example.myapplication;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnComenzarServicio;
-    Button btnDetenerServicio;
-    Button btnForm1;
-    Button btnForm2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        createNotificationChannel();
         setContentView(R.layout.activity_main);
-        this.btnComenzarServicio = findViewById(R.id.btnComenzarServicio);
-        this.btnDetenerServicio = findViewById(R.id.btnDetenerServicio);
-        this.btnForm1 = findViewById(R.id.btnForm1);
-        this.btnForm2 = findViewById(R.id.btnForm2);
-        btnComenzarServicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), ClearSharedPreferencesService.class);
-                startService(intent);
-            }
+        Button btnComenzarServicio = findViewById(R.id.btnComenzarServicio);
+        Button btnDetenerServicio = findViewById(R.id.btnDetenerServicio);
+        Button btnForm1 = findViewById(R.id.btnForm1);
+        Button btnForm2 = findViewById(R.id.btnForm2);
+
+
+        btnComenzarServicio.setOnClickListener(view -> {
+            Intent intent = new Intent(getBaseContext(), ClearSharedPreferencesService.class);
+            startService(intent);
+
         });
-        btnDetenerServicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), ClearSharedPreferencesService.class);
-                stopService(intent);
-            }
+
+        btnDetenerServicio.setOnClickListener(view -> {
+            Intent intent = new Intent(getBaseContext(), ClearSharedPreferencesService.class);
+            stopService(intent);
+
+
         });
-        btnForm1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), Form1Activity.class);
-                startActivity(intent);
-            }
+
+        btnForm1.setOnClickListener(view -> {
+            Intent intent = new Intent(getBaseContext(), Form1Activity.class);
+            startActivity(intent);
         });
-        btnForm2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), Form2Activity.class);
-                startActivity(intent);
-            }
+
+        btnForm2.setOnClickListener(view -> {
+            Intent intent = new Intent(getBaseContext(), Form2Activity.class);
+            startActivity(intent);
         });
+
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("1", "Canal 1", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 

@@ -11,6 +11,7 @@ public class Form1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form1);
+
     }
 
     @Override
@@ -24,6 +25,7 @@ public class Form1Activity extends AppCompatActivity {
         //SI HAY UN TIMER EN PROCESO, DETENER ESE TIMER
         Intent intent = new Intent(this, ClearSharedPreferencesService.class);
         stopService(intent);
+
     }
 
 
@@ -33,6 +35,8 @@ public class Form1Activity extends AppCompatActivity {
         //REINICIA EL TIMER AQUI
         Intent intent = new Intent(this, ClearSharedPreferencesService.class);
         startService(intent);
+
+
     }
 
     @Override

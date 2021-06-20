@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Form2Activity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +24,7 @@ public class Form2Activity extends AppCompatActivity {
         //SI HAY UN TIMER EN PROCESO, DETENER ESE TIMER
         Intent intent = new Intent(this, ClearSharedPreferencesService.class);
         stopService(intent);
+
     }
 
 
@@ -34,6 +34,7 @@ public class Form2Activity extends AppCompatActivity {
         //REINICIA EL TIMER AQUI
         Intent intent = new Intent(this, ClearSharedPreferencesService.class);
         startService(intent);
+
     }
 
     @Override
