@@ -42,7 +42,7 @@ public class ClearSharedPreferencesService extends Service {
 
     private final Timer timer = new Timer();
 
-    private final TimerTask task = new TimerTask() {
+    private final TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
             Log.e("Service", Constantes.mensaje);
@@ -77,9 +77,9 @@ public class ClearSharedPreferencesService extends Service {
         Log.e("Service", "Service created");
         Log.e("Build.VERSION.SDK_INT", Build.VERSION.SDK_INT + "");
         Log.e("Build.VERSION_CODES.O", Build.VERSION_CODES.O + "");
-        //handler.postDelayed(runnable, 10000);
-        //timer.schedule(task,10000);
-        executorService.schedule(futureTask, 10, TimeUnit.SECONDS);
+//        handler.postDelayed(runnable, Constantes.timeout * 60000);
+//        timer.schedule(timerTask,Constantes.timeout * 60000);
+        executorService.schedule(futureTask, Constantes.timeout, TimeUnit.MINUTES);
     }
 
     @Override
@@ -93,8 +93,8 @@ public class ClearSharedPreferencesService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.e("Service", "Service destroyed");
-        //handler.removeCallbacks(runnable);
-        //timer.cancel();
+//        handler.removeCallbacks(runnable);
+//        timer.cancel();
         futureTask.cancel(true);
     }
 

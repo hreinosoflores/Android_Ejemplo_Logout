@@ -10,6 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
 
+        <activity android:name=".Form1Activity" />
+        <activity android:name=".Form2Activity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".ClearSharedPreferencesService"
+            android:enabled="true" />
+
     </application>
 
 </manifest>
