@@ -9,20 +9,26 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 public class AlarmReceiver extends BroadcastReceiver {
-
+    private static final String TAG = "AlarmReceiver";
+    private static final int NOTIFICATION_ID = 1;
+    private static final String NOTIFICATION_CHANNEL_ID = "1";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: This method is called when the BroadcastReceiver is receiving an Intent broadcast.
-        Log.e("Receiver", Constantes.mensaje);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "1")
+        Log.d("Receiver", Constantes.mensaje);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setContentTitle("Receiver")
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(Constantes.mensaje))
+                .setContentTitle("Service")
+                .setContentText(Constantes.mensaje)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(1, builder.build());
+        try {
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+            notificationManager.notify(NOTIFICATION_ID, builder.build());
+        } catch (SecurityException ex) {
+            Log.e(TAG, "Failed to show notification due to security restrictions", ex);
+        }
     }
 }

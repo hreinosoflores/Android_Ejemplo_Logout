@@ -22,7 +22,7 @@ public class Form1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form1);
         this.alarmManager = (AlarmManager) this.getSystemService(ALARM_SERVICE);
-        this.pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AlarmReceiver.class), 0);
+        this.pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AlarmReceiver.class), PendingIntent.FLAG_IMMUTABLE);
 
     }
 
@@ -34,28 +34,18 @@ public class Form1Activity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        //SI HAY UN TIMER EN PROCESO, DETENER ESE TIMER
-//        Intent intent = new Intent(this, ClearSharedPreferencesService.class);
-//        stopService(intent);
-
         alarmManager.cancel(pendingIntent);
-        Log.e(TAG, "Alarma detenida");
-
+        Log.d(TAG, "Alarma detenida");
     }
 
 
     @Override
     protected void onPause() {
         super.onPause();
-//        //REINICIA EL TIMER AQUI
-//        Intent intent = new Intent(this, ClearSharedPreferencesService.class);
-//        startService(intent);
-
         alarmManager.setAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + Constantes.timeout * 60000,
                 pendingIntent);
-        Log.e(TAG, "Alarma iniciada");
-
+        Log.d(TAG, "Alarma iniciada");
     }
 
     @Override

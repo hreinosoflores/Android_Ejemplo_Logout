@@ -32,24 +32,16 @@ public class MainActivity extends AppCompatActivity {
         Button btnForm1 = findViewById(R.id.btnForm1);
         Button btnForm2 = findViewById(R.id.btnForm2);
 
-
         btnComenzarServicio.setOnClickListener(view -> {
-//                Intent intent = new Intent(getBaseContext(), ClearSharedPreferencesService.class);
-//                startService(intent);
-
             alarmManager.setAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                     SystemClock.elapsedRealtime() + Constantes.timeout * 60000,
                     pendingIntent);
-            Log.e(TAG, "Alarma iniciada");
+            Log.d(TAG, "Alarma iniciada");
         });
 
         btnDetenerServicio.setOnClickListener(view -> {
-//                Intent intent = new Intent(getBaseContext(), ClearSharedPreferencesService.class);
-//                stopService(intent);
-
             alarmManager.cancel(pendingIntent);
-            Log.e(TAG, "Alarma detenida");
-
+            Log.d(TAG, "Alarma detenida");
         });
 
         btnForm1.setOnClickListener(view -> {
@@ -64,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.alarmManager = (AlarmManager) this.getSystemService(ALARM_SERVICE);
 
-        this.pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AlarmReceiver.class), 0);
+        this.pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AlarmReceiver.class), PendingIntent.FLAG_IMMUTABLE);
 
     }
 
@@ -75,6 +67,5 @@ public class MainActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
     }
-
 
 }
