@@ -22,7 +22,7 @@ public class Form2Activity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //SI HAY UN TIMER EN PROCESO, DETENER ESE TIMER
-        Intent intent = new Intent(this, ClearSharedPreferencesService.class);
+        Intent intent = new Intent(this, TimedNotificationService.class);
         stopService(intent);
 
     }
@@ -32,7 +32,7 @@ public class Form2Activity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         //REINICIA EL TIMER AQUI
-        Intent intent = new Intent(this, ClearSharedPreferencesService.class);
+        Intent intent = new Intent(this, TimedNotificationService.class);
         startService(intent);
 
     }

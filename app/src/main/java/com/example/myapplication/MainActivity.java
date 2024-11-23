@@ -21,18 +21,14 @@ public class MainActivity extends AppCompatActivity {
         Button btnForm1 = findViewById(R.id.btnForm1);
         Button btnForm2 = findViewById(R.id.btnForm2);
 
-
         btnComenzarServicio.setOnClickListener(view -> {
-            Intent intent = new Intent(getBaseContext(), ClearSharedPreferencesService.class);
+            Intent intent = new Intent(getBaseContext(), TimedNotificationService.class);
             startService(intent);
-
         });
 
         btnDetenerServicio.setOnClickListener(view -> {
-            Intent intent = new Intent(getBaseContext(), ClearSharedPreferencesService.class);
+            Intent intent = new Intent(getBaseContext(), TimedNotificationService.class);
             stopService(intent);
-
-
         });
 
         btnForm1.setOnClickListener(view -> {
@@ -54,6 +50,5 @@ public class MainActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
     }
-
 
 }

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +13,8 @@
 
         <activity android:name=".Form1Activity" />
         <activity android:name=".Form2Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +23,7 @@
         </activity>
 
         <service
-            android:name=".ClearSharedPreferencesService"
+            android:name=".TimedNotificationService"
             android:enabled="true" />
 
     </application>
